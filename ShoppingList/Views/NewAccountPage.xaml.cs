@@ -18,6 +18,11 @@ public partial class NewAccountPage : ContentPage
 
     async void CreateAccount_OnClicked(object sender, EventArgs e)
     {
+        //Do Passwords Match
+        
+        //Is a Valid email address = @ . (in this order) -substring or
+        
+        
         //api stuff
         var data = JsonConvert.SerializeObject(new UserAccount(txtUser.Text, txtPassword1.Text, txtEmail.Text));
 
@@ -27,10 +32,32 @@ public partial class NewAccountPage : ContentPage
 
         var AccountStatus = response.Content.ReadAsStringAsync().Result;
 
-        AccountStatus = AccountStatus;
+        
+        //does the user exist?
+        if (AccountStatus == "user exists")
+        {
+            await DisplayAlert("Error", "Sorry, this username has been taken!", "OK");
+            return;
+        }
+        
+        //is the email in use? been used before?
+        if (AccountStatus == "email exists")
+        {
+            await DisplayAlert("Error", "Sorry, this email has already been used!", "OK");
+            return;
+        }
+        
+        if (AccountStatus == "complete")
+        {
+            App.SessionKey = "aaa";
+            Navigation.PopModalAsync();
+        }
+        else
+        {
+            await DisplayAlert("Error", "Sorry there was an error creating your account!", "OK");
+            return;
+        }
         
         
-        App.SessionKey = "aaa";
-        Navigation.PopModalAsync();
     }
 }
