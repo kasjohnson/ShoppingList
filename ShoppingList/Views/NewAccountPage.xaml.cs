@@ -49,8 +49,23 @@ public partial class NewAccountPage : ContentPage
         
         if (AccountStatus == "complete")
         {
-            App.SessionKey = "aaa";
-            Navigation.PopModalAsync();
+            response = await client.PostAsync(new Uri("https://joewetzel.com/fvtc/account/login"),
+                new StringContent(data, Encoding.UTF8, "application/json"));
+
+            var SKey = response.Content.ReadAsStringAsync().Result;
+            
+            if (!string.IsNullOrEmpty(SKey) && SKey.Length< 50)
+            {
+                App.SessionKey = SKey;
+                Navigation.PopModalAsync();
+            }
+            else
+            {
+                await DisplayAlert("Error", "Sorry, there was an issue logging you in.", "OK");
+                return;
+            }
+            
+            
         }
         else
         {
