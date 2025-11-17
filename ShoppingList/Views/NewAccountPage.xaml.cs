@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ShoppingList.Models;
+using System.Text.RegularExpressions;
 
 namespace ShoppingList.Views;
 
@@ -19,8 +20,19 @@ public partial class NewAccountPage : ContentPage
     async void CreateAccount_OnClicked(object sender, EventArgs e)
     {
         //Do Passwords Match
+        if (txtPassword1.Text != txtPassword2.Text)
+        {
+            await DisplayAlert("Error", "Passwords don't match.", "OK");
+            return;
+        }
         
         //Is a Valid email address = @ . (in this order) -substring or
+        string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+        if (!Regex.IsMatch((txtEmail.Text), pattern))
+        {
+            await DisplayAlert("Error", "Please enter a valid email address.", "OK");
+            return;
+        }
         
         
         //api stuff

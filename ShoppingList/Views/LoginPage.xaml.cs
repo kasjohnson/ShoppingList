@@ -33,6 +33,10 @@ public partial class LoginPage : ContentPage
         {
             App.SessionKey = SKey;
             Navigation.PopModalAsync();
+            
+            //added this code
+            txtUser.Text = String.Empty;
+            txtPassword.Text = String.Empty;
         }
         else
         {

@@ -54,5 +54,7 @@ public partial class MainPage : ContentPage
         
         App.SessionKey = "";
         OnAppearing1();
+        
+        
     }
 }
