@@ -20,7 +20,7 @@ public partial class NewAccountPage : ContentPage
     async void CreateAccount_OnClicked(object sender, EventArgs e)
     {
         //Do Passwords Match
-        if (txtPassword1.Text != txtPassword2.Text)
+        if (txtPassword1?.Text != txtPassword2?.Text)
         {
             await DisplayAlert("Error", "Passwords don't match.", "OK");
             return;
@@ -28,7 +28,7 @@ public partial class NewAccountPage : ContentPage
         
         //Is a Valid email address = @ . (in this order) -substring or
         string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-        if (!Regex.IsMatch((txtEmail.Text), pattern))
+        if (txtEmail.Text== null || !Regex.IsMatch((txtEmail.Text), pattern))
         {
             await DisplayAlert("Error", "Please enter a valid email address.", "OK");
             return;

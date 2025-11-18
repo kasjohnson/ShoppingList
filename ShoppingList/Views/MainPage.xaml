@@ -34,7 +34,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             
-            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Clear List"/>
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Clear List" Clicked="ClearList_OnClicked" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
